@@ -10,6 +10,9 @@ def is_game_over():
     return guessed == WORDS_TO_WIN or errors == ERRORS_TO_LOSE
 
 def guess_is_valid(candidate):
+    if candidate is guesses:
+        print("You used this word already")
+        return False
     for letter in candidate:
         if letter not in word:
             print(f"You can not use letter {letter}")
@@ -47,4 +50,7 @@ while not is_game_over():
         print(f"That's right! {WORDS_TO_WIN - guessed} to go")
     else:
         errors += 1
+        if errors == ERRORS_TO_LOSE:
+            print("you lose")
+            exit()
         print(f"Oops :( No such word, you have {ERRORS_TO_LOSE - errors} lives more")
